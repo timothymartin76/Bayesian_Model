@@ -1,0 +1,16 @@
+model
+{
+    for (i in 1:N) {
+        Online[i] ~ dnorm(mu[i], tau)
+        mu[i] <- b[1] + b[2] * Mobile[i] + b[3] * Calls[i] + 
+            b[4] * Text[i]
+    }
+    Mobile[1] ~ dnorm(6.49420E+04, 2.15)
+    Calls[1] ~ dnorm(1.68283E+06, 4.06)
+    Text[1] ~ dnorm(1.42280E+04, 2.15)
+    for (j in 1:4) {
+        b[j] ~ dnorm(0.00000E+00, 0.001)
+    }
+    tau <- pow(sd, -2)
+    sd ~ dunif(0.00000E+00, 100)
+}
